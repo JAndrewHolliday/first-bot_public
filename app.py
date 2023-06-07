@@ -77,8 +77,14 @@ async def messages(req: Request) -> Response:
     return Response(status=201)
 
 
-APP = web.Application(middlewares=[aiohttp_error_middleware])
-APP.router.add_post("/api/messages", messages)
+def  init_func(argv):
+    APP = web.Application(middlewares=[aiohttp_error_middleware])
+    APP.router.add_post("/api/messages", messages)
+
+    return APP
+
+#APP = web.Application(middlewares=[aiohttp_error_middleware])
+#APP.router.add_post("/api/messages", messages)
 
 if __name__ == "__main__":
     try:
